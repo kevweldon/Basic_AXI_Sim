@@ -1,0 +1,17 @@
+# system info my_sys_mgc_axi4_master_0 on 2023.01.13.06:38:28
+system_info:
+name,value
+DEVICE,1SM21BHU2F53E1VG
+DEVICE_FAMILY,Stratix 10
+GENERATION_ID,0
+#
+#
+# Files generated for my_sys_mgc_axi4_master_0 on 2023.01.13.06:38:28
+files:
+filepath,kind,attributes,module,is_top
+sim/my_sys_mgc_axi4_master_0.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,my_sys_mgc_axi4_master_0,true
+#
+# Map from instance-path to kind of module
+instances:
+instancePath,module
+my_sys_mgc_axi4_master_0.mgc_axi4_master_0,mgc_axi4_master

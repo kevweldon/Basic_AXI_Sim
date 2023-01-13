@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="sim/my_sys_mgc_axi4_master_0.v"
+   type="VERILOG"
+   library="my_sys_mgc_axi4_master_0"
+   hasInlineConfiguration="true" />
+ <topLevel name="my_sys_mgc_axi4_master_0.my_sys_mgc_axi4_master_0" />
+ <deviceFamily name="stratix10" />
+ <device name="1SM21BHU2F53E1VG" />
+</simPackage>

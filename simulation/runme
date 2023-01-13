@@ -1,0 +1,18 @@
+#!/bin/sh
+# echo on
+set -x
+
+PROJECT=top
+REVISION=top
+SIMULATION_DIRECTORY=simulation
+SIM_SCRIPTS=./sim_scripts
+
+rm -f vsim.wlf
+# Run simulation in ModelSim
+vsim -mvchome $QUARTUS_ROOTDIR/../ip/altera/mentor_vip_ae/common -c -do 'source run_sim.tcl'
+# Open QuestaSim and view waves
+cp transcript sim_transcript
+vsim -gui -view vsim.wlf -do 'wave.do'
+
+# echo off
+set +x
