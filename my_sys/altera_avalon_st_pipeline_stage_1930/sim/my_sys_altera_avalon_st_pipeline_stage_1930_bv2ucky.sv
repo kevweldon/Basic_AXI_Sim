@@ -1,4 +1,4 @@
-// (C) 2001-2022 Intel Corporation. All rights reserved.
+// (C) 2001-2023 Intel Corporation. All rights reserved.
 // Your use of Intel Corporation's design tools, logic functions and other 
 // software and tools, and its AMPP partner logic functions, and any output 
 // files from any of the foregoing (including device programming or simulation 
@@ -13,7 +13,7 @@
 
 `timescale 1ns / 1ns
 
-module my_sys_altera_avalon_st_pipeline_stage_1920_zterisq #(
+module my_sys_altera_avalon_st_pipeline_stage_1930_bv2ucky #(
     parameter 
       USE_FIFO_IP = 0, // unsued at moment
       SYMBOLS_PER_BEAT = 1,

@@ -1,3 +1,4 @@
+// Kevin Weldon 5/2023
 
 module top_tb;
    
@@ -42,6 +43,7 @@ module top_tb;
 	   .wstrobe({(DATA_WIDTH/8){1'b1}}),
 	   .transaction_id(0)
 	   );
+	$display ( "%m: %t: Wrote data 0x%h at address 0x%h", $time, {(DATA_WIDTH/8){byte_data}}, address*(DATA_WIDTH/8));
 
 	// Write repeating 8'h02 to next word address
 	address = 1;
@@ -53,6 +55,7 @@ module top_tb;
 	   .wstrobe({(DATA_WIDTH/8){1'b1}}),
 	   .transaction_id(0)
 	   );
+	$display ( "%m: %t: Wrote data 0x%h at address 0x%h", $time, {(DATA_WIDTH/8){byte_data}}, address*(DATA_WIDTH/8));
 
 	// Read data from address 0.
 	address = 0;
@@ -63,11 +66,14 @@ module top_tb;
 	   .data(read_data[0])
 	   );
 	if (read_data[0] == {(DATA_WIDTH/8){byte_data}})
-          $display ( "top_tb: %t: Read correct data 0x%h at address 0x%h", 
+          $display ( "%m: %t: Read correct data 0x%h at address 0x%h", 
 		     $time, {(DATA_WIDTH/8){byte_data}}, 0 * (DATA_WIDTH/8));
 	else
-          $display ( "top_tb: %t: Error: Expected data 0x%h at address 0x%h, but got 0x%h", 
-		     $time,  {(DATA_WIDTH/8){byte_data}}, address * (DATA_WIDTH/8), read_data[0]);
+	  begin
+             $display ( "%m: %t: Error: Expected data 0x%h at address 0x%h, but got 0x%h", 
+			$time,  {(DATA_WIDTH/8){byte_data}}, address * (DATA_WIDTH/8), read_data[0]);
+	     stop_sim();
+	  end
 	
 	// Read data from address 1.
 	address = 1;
@@ -78,12 +84,14 @@ module top_tb;
 	   .data(read_data[0])
 	   );
 	if (read_data[0] == {(DATA_WIDTH/8){byte_data}})
-          $display ( "top_tb: %t: Read correct data 0x%h at address 0x%h", 
+          $display ( "%m: %t: Read correct data 0x%h at address 0x%h", 
 		     $time, {(DATA_WIDTH/8){byte_data}}, 0 * (DATA_WIDTH/8));
 	else
-          $display ( "top_tb: %t: Error: Expected data 0x%h at address 0x%h, but got 0x%h", 
-		     $time,  {(DATA_WIDTH/8){byte_data}}, address * (DATA_WIDTH/8), read_data[0]);
-
+	  begin
+             $display ( "%m: %t: Error: Expected data 0x%h at address 0x%h, but got 0x%h", 
+			$time,  {(DATA_WIDTH/8){byte_data}}, address * (DATA_WIDTH/8), read_data[0]);
+	     stop_sim();
+	  end
 
 	// Write data burst length of 8 to start address 0.
 	// Transaction ID is starting ID and will automatically increment for each 
@@ -103,6 +111,11 @@ module top_tb;
 	   .transaction_id(0),
 	   .burst_length(burst_length)
 	   );
+	for (logic[DATA_WIDTH-1:0] i=0; i<burst_length; i++)
+	  begin
+	     address = i;
+	     $display ( "%m: %t: Wrote data 0x%h at address 0x%h", $time, write_data[i], address*(DATA_WIDTH/8));
+	  end
 	
 	// Read data burst of length 8 from address 0.
 	address = 0;
@@ -116,16 +129,18 @@ module top_tb;
 	for (int i=0; i<burst_length; i++)
 	  begin
 	     address = i;
-	     if (read_data[i] == i)
-	       $display ( "top_tb: %t: Read correct data 0x%h at word address 0x%h", $time, i, address);
+	     if (read_data[i] == write_data[i])
+	       $display ( "%m: %t: Read correct data 0x%h at word address 0x%h", $time, i, address);
 	     else
-	       $display ( "top_tb: %t: Error: Expected data 0x%h at word address 0x%h, recieved 0x%h", 
-			  $time, i, address, read_data[i]);
+	       begin
+		  $display ( "%m: %t: Error: Expected data 0x%h at word address 0x%h, recieved 0x%h", 
+			     $time, i, address, read_data[i]);
+		  stop_sim();
+	       end
 	  end
 
-	$display("Simulation stopped at %t", $time);
-	//$stop;
-	$finish;
+	$display("Simulation passed");
+	stop_sim();
      end // initial begin
 
   axi_master_bfm_wrapper 
@@ -139,7 +154,7 @@ module top_tb;
       ) u_master  
       (
        .bfm(dut.mgc_axi4_master_0.mgc_axi4_master_0),
-       .verbose(1)
+       .verbose(0)
        );
 
    my_sys dut
@@ -147,5 +162,12 @@ module top_tb;
       .clk_clk ( clk_clk ),
       .reset_reset ( reset_reset )
       );
+
+   task stop_sim;
+     begin
+	$display("%m: %t: Simulation finished.", $time);
+	$finish;
+     end
+   endtask
 
 endmodule: top_tb

@@ -94,7 +94,7 @@
 # within the Quartus project, and generate a unified
 # script which supports all the Intel IP within the design.
 # ----------------------------------------
-# ACDS 22.4 94 linux 2023.01.13.06:38:32
+# ACDS 23.1 115 linux 2023.05.04.10:46:17
 
 # ----------------------------------------
 # Initialize variables
@@ -113,7 +113,7 @@ if ![info exists QSYS_SIMDIR] {
 }
 
 if ![info exists QUARTUS_INSTALL_DIR] { 
-  set QUARTUS_INSTALL_DIR "/nfs/site/disks/swbld_archive_3/acds/22.4/94/linux64/quartus/"
+  set QUARTUS_INSTALL_DIR "/nfs/site/disks/swbld_archive_3/acds/23.1/115/linux64/quartus/"
 }
 
 if ![info exists USER_DEFINED_COMPILE_OPTIONS] { 
@@ -202,7 +202,7 @@ alias file_copy {
 # ----------------------------------------
 # Create compilation libraries
 
-set logical_libraries [list "work" "work_lib" "altera_ver" "lpm_ver" "sgate_ver" "altera_mf_ver" "altera_lnsim_ver" "fourteennm_ver" "fourteennm_hssi_ver" "altera" "lpm" "sgate" "altera_mf" "altera_lnsim" "fourteennm" "fourteennm_hssi"]
+set logical_libraries [list "work" "work_lib" "lpm_ver" "sgate_ver" "altera_ver" "altera_mf_ver" "altera_lnsim_ver" "fourteennm_ver" "fourteennm_hssi_ver" "lpm" "sgate" "altera" "altera_mf" "altera_lnsim" "fourteennm" "fourteennm_hssi"]
 
 proc ensure_lib { lib } { if ![file isdirectory $lib] { vlib $lib } }
 ensure_lib          ./libraries/     
@@ -210,12 +210,12 @@ ensure_lib          ./libraries/work/
 vmap       work     ./libraries/work/
 vmap       work_lib ./libraries/work/
 if [string is false -strict [modelsim_ae_select $FORCE_MODELSIM_AE_SELECTION]] {
-  ensure_lib                     ./libraries/altera_ver/         
-  vmap       altera_ver          ./libraries/altera_ver/         
   ensure_lib                     ./libraries/lpm_ver/            
   vmap       lpm_ver             ./libraries/lpm_ver/            
   ensure_lib                     ./libraries/sgate_ver/          
   vmap       sgate_ver           ./libraries/sgate_ver/          
+  ensure_lib                     ./libraries/altera_ver/         
+  vmap       altera_ver          ./libraries/altera_ver/         
   ensure_lib                     ./libraries/altera_mf_ver/      
   vmap       altera_mf_ver       ./libraries/altera_mf_ver/      
   ensure_lib                     ./libraries/altera_lnsim_ver/   
@@ -224,12 +224,12 @@ if [string is false -strict [modelsim_ae_select $FORCE_MODELSIM_AE_SELECTION]] {
   vmap       fourteennm_ver      ./libraries/fourteennm_ver/     
   ensure_lib                     ./libraries/fourteennm_hssi_ver/
   vmap       fourteennm_hssi_ver ./libraries/fourteennm_hssi_ver/
-  ensure_lib                     ./libraries/altera/             
-  vmap       altera              ./libraries/altera/             
   ensure_lib                     ./libraries/lpm/                
   vmap       lpm                 ./libraries/lpm/                
   ensure_lib                     ./libraries/sgate/              
   vmap       sgate               ./libraries/sgate/              
+  ensure_lib                     ./libraries/altera/             
+  vmap       altera              ./libraries/altera/             
   ensure_lib                     ./libraries/altera_mf/          
   vmap       altera_mf           ./libraries/altera_mf/          
   ensure_lib                     ./libraries/altera_lnsim/       
@@ -255,9 +255,9 @@ alias dev_com {
     echo "\[exec\] dev_com"
   }
   if [string is false -strict [modelsim_ae_select $FORCE_MODELSIM_AE_SELECTION]] {
-    eval  vlog $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS     "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.v"               -work altera_ver         
     eval  vlog $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS     "$QUARTUS_INSTALL_DIR/eda/sim_lib/220model.v"                        -work lpm_ver            
     eval  vlog $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS     "$QUARTUS_INSTALL_DIR/eda/sim_lib/sgate.v"                           -work sgate_ver          
+    eval  vlog $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS     "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.v"               -work altera_ver         
     eval  vlog $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS     "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.v"                       -work altera_mf_ver      
     eval  vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_lnsim.sv"                   -work altera_lnsim_ver   
     eval  vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS "$QUARTUS_INSTALL_DIR/eda/sim_lib/fourteennm_atoms.sv"               -work fourteennm_ver     
@@ -266,16 +266,16 @@ alias dev_com {
     eval  vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS "$QUARTUS_INSTALL_DIR/eda/sim_lib/ct1_hssi_atoms_ncrypt.sv"          -work fourteennm_hssi_ver
     eval  vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS "$QUARTUS_INSTALL_DIR/eda/sim_lib/ct1_hip_atoms.sv"                  -work fourteennm_hssi_ver
     eval  vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS "$QUARTUS_INSTALL_DIR/eda/sim_lib/ct1_hip_atoms_ncrypt.sv"           -work fourteennm_hssi_ver
+    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/220pack.vhd"                       -work lpm                
+    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/220model.vhd"                      -work lpm                
+    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/sgate_pack.vhd"                    -work sgate              
+    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/sgate.vhd"                         -work sgate              
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_syn_attributes.vhd"         -work altera             
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_standard_functions.vhd"     -work altera             
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/alt_dspbuilder_package.vhd"        -work altera             
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_europa_support_lib.vhd"     -work altera             
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives_components.vhd"  -work altera             
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_primitives.vhd"             -work altera             
-    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/220pack.vhd"                       -work lpm                
-    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/220model.vhd"                      -work lpm                
-    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/sgate_pack.vhd"                    -work sgate              
-    eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/sgate.vhd"                         -work sgate              
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf_components.vhd"          -work altera_mf          
     eval  vcom $USER_DEFINED_VHDL_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS        "$QUARTUS_INSTALL_DIR/eda/sim_lib/altera_mf.vhd"                     -work altera_mf          
     eval  vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS "$QUARTUS_INSTALL_DIR/eda/sim_lib/mentor/altera_lnsim_for_vhdl.sv"   -work altera_lnsim       

@@ -18,7 +18,7 @@
 // altera message_level Level1 
 // altera message_off 10034 10035 10036 10037 10230 10240 10030 13469 16735 16788 
 
-module my_sys_onchip_memory_altera_avalon_onchip_memory2_1936_q5ewcpa (
+module my_sys_onchip_memory_altera_avalon_onchip_memory2_1937_rgxoysa (
                                                                         // inputs:
                                                                          address,
                                                                          byteenable,

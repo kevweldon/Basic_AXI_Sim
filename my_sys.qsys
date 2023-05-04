@@ -23,8 +23,9 @@ https://fpgasoftware.intel.com/eula.-->
       <altera:name>$${FILENAME}</altera:name>
       <altera:displayName>$${FILENAME}</altera:displayName>
       <altera:version>1.0</altera:version>
+      <altera:description></altera:description>
       <altera:tags></altera:tags>
-      <altera:categories></altera:categories>
+      <altera:categories>Systems</altera:categories>
       <altera:tool>QsysPro</altera:tool>
     </altera:catalog_card_info>
     <altera:altera_system_parameters>
@@ -937,6 +938,14 @@ https://fpgasoftware.intel.com/eula.-->
                             &lt;value&gt;16&lt;/value&gt;
                         &lt;/entry&gt;
                         &lt;entry&gt;
+                            &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
+                            &lt;key&gt;noRepeatedIdsBetweenSubordinates&lt;/key&gt;
+                            &lt;value&gt;0&lt;/value&gt;
+                        &lt;/entry&gt;
+                        &lt;entry&gt;
                             &lt;key&gt;issuesINCRBursts&lt;/key&gt;
                             &lt;value&gt;true&lt;/value&gt;
                         &lt;/entry&gt;
@@ -1478,6 +1487,14 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;combinedIssuingCapability&lt;/key&gt;
                         &lt;value&gt;16&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                        &lt;value&gt;0&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;noRepeatedIdsBetweenSubordinates&lt;/key&gt;
+                        &lt;value&gt;0&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;issuesINCRBursts&lt;/key&gt;
@@ -2342,7 +2359,7 @@ https://fpgasoftware.intel.com/eula.-->
     &lt;/boundary&gt;
     &lt;originalModuleInfo&gt;
         &lt;className&gt;altera_avalon_onchip_memory2&lt;/className&gt;
-        &lt;version&gt;19.3.6&lt;/version&gt;
+        &lt;version&gt;19.3.7&lt;/version&gt;
         &lt;displayName&gt;On-Chip Memory (RAM or ROM) Intel FPGA IP&lt;/displayName&gt;
     &lt;/originalModuleInfo&gt;
     &lt;systemInfoParameterDescriptors&gt;
@@ -2558,6 +2575,7 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;bridgedAddressOffset&lt;/key&gt;
+                        &lt;value&gt;0&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;bridgesToMaster&lt;/key&gt;
@@ -3237,7 +3255,7 @@ https://fpgasoftware.intel.com/eula.-->
       </altera:module>
     </altera:modules>
     <altera:connections>
-      <altera:connection altera:kind="avalon" altera:version="22.4" altera:start="mgc_axi4_master_0.altera_axi4_master" altera:end="my_sys_onchip_memory.s1">
+      <altera:connection altera:kind="avalon" altera:version="23.1" altera:start="mgc_axi4_master_0.altera_axi4_master" altera:end="my_sys_onchip_memory.s1">
         <altera:connection_parameter altera:parameter_name="arbitrationPriority" altera:parameter_value="1"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="baseAddress" altera:parameter_value="0x0000"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="defaultConnection" altera:parameter_value="false"></altera:connection_parameter>
@@ -3247,6 +3265,7 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.enableAllPipelines" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.enableEccProtection" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.enableInstrumentation" altera:parameter_value="FALSE"></altera:connection_parameter>
+        <altera:connection_parameter altera:parameter_name="qsys_mm.enableOutOfOrderSupport" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.insertDefaultSlave" altera:parameter_value="FALSE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.interconnectResetSource" altera:parameter_value="DEFAULT"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.interconnectType" altera:parameter_value="STANDARD"></altera:connection_parameter>
@@ -3257,11 +3276,11 @@ https://fpgasoftware.intel.com/eula.-->
         <altera:connection_parameter altera:parameter_name="qsys_mm.syncResets" altera:parameter_value="TRUE"></altera:connection_parameter>
         <altera:connection_parameter altera:parameter_name="qsys_mm.widthAdapterImplementation" altera:parameter_value="GENERIC_CONVERTER"></altera:connection_parameter>
       </altera:connection>
-      <altera:connection altera:kind="clock" altera:version="22.4" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="22.4" altera:start="clock_in.out_clk" altera:end="my_sys_onchip_memory.clk1"></altera:connection>
-      <altera:connection altera:kind="clock" altera:version="22.4" altera:start="clock_in.out_clk" altera:end="mgc_axi4_master_0.clock_sink"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="22.4" altera:start="reset_in.out_reset" altera:end="my_sys_onchip_memory.reset1"></altera:connection>
-      <altera:connection altera:kind="reset" altera:version="22.4" altera:start="reset_in.out_reset" altera:end="mgc_axi4_master_0.reset_sink"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="23.1" altera:start="clock_in.out_clk" altera:end="reset_in.clk"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="23.1" altera:start="clock_in.out_clk" altera:end="my_sys_onchip_memory.clk1"></altera:connection>
+      <altera:connection altera:kind="clock" altera:version="23.1" altera:start="clock_in.out_clk" altera:end="mgc_axi4_master_0.clock_sink"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="23.1" altera:start="reset_in.out_reset" altera:end="my_sys_onchip_memory.reset1"></altera:connection>
+      <altera:connection altera:kind="reset" altera:version="23.1" altera:start="reset_in.out_reset" altera:end="mgc_axi4_master_0.reset_sink"></altera:connection>
     </altera:connections>
     <altera:interconnect_requirements></altera:interconnect_requirements>
     <altera:wire_level_connections></altera:wire_level_connections>
@@ -3281,11 +3300,11 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:busInterfaces>
           <ipxact:busInterface>
             <ipxact:name>my_sys_onchip_memory.s1</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="avalon" version="22.4"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="avalon" version="23.1"></ipxact:busType>
           </ipxact:busInterface>
           <ipxact:busInterface>
             <ipxact:name>mgc_axi4_master_0.altera_axi4_master</ipxact:name>
-            <ipxact:busType vendor="intel" library="intel" name="axi4" version="22.4"></ipxact:busType>
+            <ipxact:busType vendor="intel" library="intel" name="axi4" version="23.1"></ipxact:busType>
             <ipxact:master>
               <ipxact:addressSpaceRef addressSpaceRef="mgc_axi4_master_0.altera_axi4_master">
                 <ipxact:baseAddress>0x0000</ipxact:baseAddress>

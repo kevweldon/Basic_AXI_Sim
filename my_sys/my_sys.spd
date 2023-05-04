@@ -37,13 +37,13 @@
    type="SYSTEM_VERILOG"
    library="altera_merlin_router_1921" />
  <file
-   path="altera_avalon_st_pipeline_stage_1920/sim/my_sys_altera_avalon_st_pipeline_stage_1920_zterisq.sv"
+   path="altera_avalon_st_pipeline_stage_1930/sim/my_sys_altera_avalon_st_pipeline_stage_1930_bv2ucky.sv"
    type="SYSTEM_VERILOG"
-   library="altera_avalon_st_pipeline_stage_1920" />
+   library="altera_avalon_st_pipeline_stage_1930" />
  <file
-   path="altera_avalon_st_pipeline_stage_1920/sim/altera_avalon_st_pipeline_base.v"
+   path="altera_avalon_st_pipeline_stage_1930/sim/altera_avalon_st_pipeline_base.v"
    type="SYSTEM_VERILOG"
-   library="altera_avalon_st_pipeline_stage_1920" />
+   library="altera_avalon_st_pipeline_stage_1930" />
  <file
    path="altera_merlin_burst_adapter_1923/sim/my_sys_altera_merlin_burst_adapter_altera_avalon_st_pipeline_stage_1923_ggrplpy.v"
    type="VERILOG"
@@ -106,7 +106,7 @@
    type="SYSTEM_VERILOG"
    library="altera_merlin_multiplexer_1921" />
  <file
-   path="altera_mm_interconnect_1920/sim/my_sys_altera_mm_interconnect_1920_mkw2iea.v"
+   path="altera_mm_interconnect_1920/sim/my_sys_altera_mm_interconnect_1920_d5mphba.v"
    type="VERILOG"
    library="altera_mm_interconnect_1920"
    hasInlineConfiguration="true" />

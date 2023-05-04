@@ -20,10 +20,10 @@ https://fpgasoftware.intel.com/eula.-->
   <ipxact:busInterfaces>
     <ipxact:busInterface>
       <ipxact:name>altera_axi4_master</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="axi4" version="22.4"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="axi4" version="23.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="22.4"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="axi4" version="23.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -427,6 +427,16 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>Combined issuing capability</ipxact:displayName>
           <ipxact:value>16</ipxact:value>
         </ipxact:parameter>
+        <ipxact:parameter parameterId="enableConcurrentSubordinateAccess" type="longint">
+          <ipxact:name>enableConcurrentSubordinateAccess</ipxact:name>
+          <ipxact:displayName>enableConcurrentSubordinateAccess</ipxact:displayName>
+          <ipxact:value>0</ipxact:value>
+        </ipxact:parameter>
+        <ipxact:parameter parameterId="noRepeatedIdsBetweenSubordinates" type="longint">
+          <ipxact:name>noRepeatedIdsBetweenSubordinates</ipxact:name>
+          <ipxact:displayName>noRepeatedIdsBetweenSubordinates</ipxact:displayName>
+          <ipxact:value>0</ipxact:value>
+        </ipxact:parameter>
         <ipxact:parameter parameterId="issuesINCRBursts" type="bit">
           <ipxact:name>issuesINCRBursts</ipxact:name>
           <ipxact:displayName>Issues INCR bursts</ipxact:displayName>
@@ -446,10 +456,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>clock_sink</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="clock" version="22.4"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="clock" version="23.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="22.4"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="clock" version="23.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -483,10 +493,10 @@ https://fpgasoftware.intel.com/eula.-->
     </ipxact:busInterface>
     <ipxact:busInterface>
       <ipxact:name>reset_sink</ipxact:name>
-      <ipxact:busType vendor="intel" library="intel" name="reset" version="22.4"></ipxact:busType>
+      <ipxact:busType vendor="intel" library="intel" name="reset" version="23.1"></ipxact:busType>
       <ipxact:abstractionTypes>
         <ipxact:abstractionType>
-          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="22.4"></ipxact:abstractionRef>
+          <ipxact:abstractionRef vendor="intel" library="intel" name="reset" version="23.1"></ipxact:abstractionRef>
           <ipxact:portMaps>
             <ipxact:portMap>
               <ipxact:logicalPort>
@@ -529,6 +539,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:fileSetRef>
           <ipxact:localName>QUARTUS_SYNTH</ipxact:localName>
         </ipxact:fileSetRef>
+        <ipxact:parameters></ipxact:parameters>
       </ipxact:componentInstantiation>
     </ipxact:instantiations>
     <ipxact:ports>
@@ -536,6 +547,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>AWVALID</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -638,6 +650,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>AWLOCK</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -686,6 +699,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>AWREADY</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -698,6 +712,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>ARVALID</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -800,6 +815,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>ARLOCK</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -848,6 +864,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>ARREADY</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -860,6 +877,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>RVALID</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -890,6 +908,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>RLAST</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -902,6 +921,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>RREADY</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -914,6 +934,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>WVALID</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -926,6 +947,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>WLAST</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -938,6 +960,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>WREADY</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -950,6 +973,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>BVALID</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -980,6 +1004,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>BREADY</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>out</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -1244,6 +1269,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>ACLK</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -1256,6 +1282,7 @@ https://fpgasoftware.intel.com/eula.-->
         <ipxact:name>ARESETn</ipxact:name>
         <ipxact:wire>
           <ipxact:direction>in</ipxact:direction>
+          <ipxact:vectors></ipxact:vectors>
           <ipxact:wireTypeDefs>
             <ipxact:wireTypeDef>
               <ipxact:typeName>STD_LOGIC</ipxact:typeName>
@@ -1494,6 +1521,17 @@ https://fpgasoftware.intel.com/eula.-->
           <ipxact:displayName>bonusData</ipxact:displayName>
           <ipxact:value>bonusData 
 {
+   element $system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Stratix 10";
+         type = "String";
+      }
+   }
+   element mgc_axi4_master_0
+   {
+   }
 }
 </ipxact:value>
         </ipxact:parameter>
@@ -1949,6 +1987,14 @@ https://fpgasoftware.intel.com/eula.-->
                     &lt;entry&gt;
                         &lt;key&gt;combinedIssuingCapability&lt;/key&gt;
                         &lt;value&gt;16&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;enableConcurrentSubordinateAccess&lt;/key&gt;
+                        &lt;value&gt;0&lt;/value&gt;
+                    &lt;/entry&gt;
+                    &lt;entry&gt;
+                        &lt;key&gt;noRepeatedIdsBetweenSubordinates&lt;/key&gt;
+                        &lt;value&gt;0&lt;/value&gt;
                     &lt;/entry&gt;
                     &lt;entry&gt;
                         &lt;key&gt;issuesINCRBursts&lt;/key&gt;

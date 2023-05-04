@@ -69,7 +69,7 @@ module axi_master_bfm_wrapper
       data = trans.get_data_words(0);
       if (verbose==1)
 	begin
-	   $display ( "%m: %t: read data 0x%h at address 0x%h.", 
+	   $display ( "%m: %t: Read data 0x%h at address 0x%h.", 
 		      $time, data, address);
 	end
    endtask // axi_read

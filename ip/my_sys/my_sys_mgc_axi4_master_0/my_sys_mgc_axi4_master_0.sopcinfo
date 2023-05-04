@@ -4,8 +4,8 @@
  kind="my_sys_mgc_axi4_master_0"
  version="1.0"
  fabric="QSYS">
- <!-- Format version 22.4 94 (Future versions may contain additional information.) -->
- <!-- 2023.01.13.06:38:28 -->
+ <!-- Format version 23.1 115 (Future versions may contain additional information.) -->
+ <!-- 2023.05.04.10:46:03 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
@@ -442,7 +442,7 @@ the requested settings for a module instance. -->
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
-  <interface name="altera_axi4_master" kind="altera_axi4_master" version="22.4">
+  <interface name="altera_axi4_master" kind="altera_axi4_master" version="23.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -513,6 +513,22 @@ parameters are a RESULT of the module parameters. -->
    <parameter name="combinedIssuingCapability">
     <type>java.lang.Integer</type>
     <value>16</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="enableConcurrentSubordinateAccess">
+    <type>java.lang.Integer</type>
+    <value>0</value>
+    <derived>false</derived>
+    <enabled>true</enabled>
+    <visible>true</visible>
+    <valid>true</valid>
+   </parameter>
+   <parameter name="noRepeatedIdsBetweenSubordinates">
+    <type>java.lang.Integer</type>
+    <value>0</value>
     <derived>false</derived>
     <enabled>true</enabled>
     <visible>true</visible>
@@ -825,7 +841,7 @@ parameters are a RESULT of the module parameters. -->
     <role>bid</role>
    </port>
   </interface>
-  <interface name="clock_sink" kind="clock_sink" version="22.4">
+  <interface name="clock_sink" kind="clock_sink" version="23.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -870,7 +886,7 @@ parameters are a RESULT of the module parameters. -->
     <role>clk</role>
    </port>
   </interface>
-  <interface name="reset_sink" kind="reset_sink" version="22.4">
+  <interface name="reset_sink" kind="reset_sink" version="23.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -930,7 +946,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>AXI4 Manager</displayName>
-  <version>22.4</version>
+  <version>23.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -938,7 +954,7 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Clock Input</displayName>
-  <version>22.4</version>
+  <version>23.1</version>
  </plugin>
  <plugin>
   <instanceCount>1</instanceCount>
@@ -946,8 +962,8 @@ parameters are a RESULT of the module parameters. -->
   <type>com.altera.entityinterfaces.IElementClass</type>
   <subtype>com.altera.entityinterfaces.IMutableConnectionPoint</subtype>
   <displayName>Reset Input</displayName>
-  <version>22.4</version>
+  <version>23.1</version>
  </plugin>
- <reportVersion>22.4 94</reportVersion>
+ <reportVersion>23.1 115</reportVersion>
  <uniqueIdentifier></uniqueIdentifier>
 </EnsembleReport>
