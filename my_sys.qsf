@@ -1,17 +1,17 @@
 set_global_assignment -name TOP_LEVEL_ENTITY my_sys
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 22.4.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "06:30:40  JANUARY 13, 2023"
-set_global_assignment -name LAST_QUARTUS_VERSION "23.2.0 Pro Edition"
-set_global_assignment -name SYSTEMVERILOG_FILE my_sys.sv
+set_global_assignment -name LAST_QUARTUS_VERSION "23.3.0 Pro Edition"
 set_global_assignment -name FAMILY "Stratix 10"
 set_global_assignment -name DEVICE 1SM21BHU2F53E1VG
 set_global_assignment -name FLOW_DISABLE_ASSEMBLER ON
-set_global_assignment -name SDC_FILE my_sys.sdc
 set_global_assignment -name FLOW_ENABLE_INTERACTIVE_TIMING_ANALYZER OFF
 set_global_assignment -name STA_AUTO_UPDATE_TIMING_NETLIST OFF
+set_global_assignment -name BOARD default
+set_global_assignment -name SYSTEMVERILOG_FILE my_sys.sv
+set_global_assignment -name SDC_FILE my_sys.sdc
 set_global_assignment -name IP_FILE ip/my_sys/my_sys_clock_in.ip
 set_global_assignment -name IP_FILE ip/my_sys/my_sys_reset_in.ip
 set_global_assignment -name QSYS_FILE my_sys.qsys
 set_global_assignment -name IP_FILE ip/my_sys/my_sys_onchip_memory.ip
 set_global_assignment -name IP_FILE ip/my_sys/my_sys_mgc_axi4_master_0.ip
-set_global_assignment -name BOARD default

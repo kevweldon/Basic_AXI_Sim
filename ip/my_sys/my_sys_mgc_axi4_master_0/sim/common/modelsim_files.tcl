@@ -61,4 +61,10 @@ namespace eval my_sys_mgc_axi4_master_0 {
       } 
       return $path 
   } 
+  proc get_dpi_libraries {QSYS_SIMDIR} {
+    set libraries [dict create]
+    
+    return $libraries
+  }
+  
 }
