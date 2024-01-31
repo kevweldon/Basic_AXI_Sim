@@ -19,7 +19,7 @@
 //-----------------------------------------
 `timescale 1 ns / 1 ns
  
-module my_sys_altera_merlin_axi_master_ni_1960_zjziuba
+module my_sys_altera_merlin_axi_master_ni_1962_2kryw2a
 #( 
     //----------------
     // AXI Interface Parameters
@@ -557,104 +557,7 @@ always_comb
         write_burst_type = burst_type_decode(awburst_q0);
         read_burst_type  = burst_type_decode(arburst_q0);
     end
- 
-//--------------------------------------
-// Calculate the value of burstwrap for a wrapping burst. 
-// The algorithm figures out the width of the burstwrap 
-// boundary, and uses that to set a bit mask for burstwrap.
-//
-// This should synthesize to a small adder, followed by a 
-// per-bit comparator (which gets folded into the adder).
-//--------------------------------------
-reg     [31 : 0]                        burstwrap_value_write;
-reg     [31 : 0]                        burstwrap_value_read;
-reg     [PKT_BURSTWRAP_W - 2 : 0]       burstwrap_boundary_write;
-reg     [PKT_BURSTWRAP_W - 2 : 0]       burstwrap_boundary_read;
-wire    [31 : 0]                        burstwrap_boundary_width_write;
-wire    [31 : 0]                        burstwrap_boundary_width_read;
- 
-reg     [PKT_ADDR_W-1 : 0]              incremented_burst_address;
-reg     [PKT_ADDR_W-1 : 0]              burstwrap_mask;
-reg     [PKT_ADDR_W-1 : 0]              burst_address_high;
-reg     [PKT_ADDR_W-1 : 0]              burst_address_low;
- 
-assign burstwrap_boundary_width_write   =    awsize_q0 + log2ceil(awlen_q0 + 1);
-assign burstwrap_boundary_width_read    =    arsize_q0 + log2ceil(arlen_q0 + 1);
- 
-function reg [PKT_BURSTWRAP_W - 2 : 0] burstwrap_boundary_calculation
-(
-    input [31 : 0]  burstwrap_boundary_width,
-    input int       width 
-);
-    integer i;
- 
-    burstwrap_boundary_calculation = 0;
-    for (i = 0; i < width; i++) begin
-        if (burstwrap_boundary_width > i)
-            burstwrap_boundary_calculation[i] = 1;
-    end
- 
-endfunction 
- 
-assign burstwrap_boundary_write = burstwrap_boundary_calculation(burstwrap_boundary_width_write, PKT_BURSTWRAP_W - 1);
-assign burstwrap_boundary_read  = burstwrap_boundary_calculation(burstwrap_boundary_width_read, PKT_BURSTWRAP_W - 1);
- 
-//--------------------------------------
-// Use the burst type to set correct burstwrap value and address increment
-//--------------------------------------
- 
-wire    [31:0]  bytes_in_transfer_minusone_write_wire;     // eliminates synthesis warning
-wire    [31:0]  bytes_in_transfer_minusone_read_wire;     // eliminates synthesis warning 
- 
-assign  bytes_in_transfer_minusone_write_wire = bytes_in_transfer(awsize_q0) - 1;
-assign  bytes_in_transfer_minusone_read_wire  = bytes_in_transfer(arsize_q0) - 1; 
- 
-always_comb
-begin
-    burstwrap_value_write = 0;
-    case (write_burst_type)
-        INCR:    
-        begin
-            burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = {PKT_BURSTWRAP_W {1'b1}};
-        end 
-        WRAP:
-        begin
-            burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = {1'b0, burstwrap_boundary_write};
-        end
-        FIXED:
-        begin
-            burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = bytes_in_transfer_minusone_write_wire[PKT_BURSTWRAP_W -1 : 0];
-        end
-        default:
-        begin
-            burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = {PKT_BURSTWRAP_W {1'b1}};
-        end
-    endcase
-end
- 
-always_comb
-begin
-    burstwrap_value_read = 0;
-    case (read_burst_type)
-        INCR:    
-        begin
-            burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = {PKT_BURSTWRAP_W {1'b1}};
-        end 
-        WRAP:
-        begin
-            burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = {1'b0, burstwrap_boundary_read};
-        end
-        FIXED:
-        begin
-            burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = bytes_in_transfer_minusone_read_wire[PKT_BURSTWRAP_W -1 : 0];    
-        end
-        default:
-        begin
-            burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = {PKT_BURSTWRAP_W {1'b1}};
-        end
-    endcase
-end
- 
+
 //--------------------------------------
 // Global signals
 //--------------------------------------
@@ -714,12 +617,108 @@ end
 // Refer for comments inside the component for more details
 //-----------------------------------------------------------------------
     
-    reg [PKT_ADDR_W-1 : 0] address_aligned;
+reg [PKT_ADDR_W-1 : 0]  address_aligned;
+reg [31 : 0]            burstwrap_value_write;
+reg [31 : 0]            burstwrap_value_read;
  
     generate
         if (AXI_VERSION != "AXI4Lite") begin
-            reg [PKT_ADDR_W + (PKT_BURSTWRAP_W-1) + 4 : 0] address_for_alignment;
-            reg [PKT_ADDR_W+$clog2(NUMSYMBOLS)-1 :0]  address_after_alignment;
+          //--------------------------------------
+          // Calculate the value of burstwrap for a wrapping burst. 
+          // The algorithm figures out the width of the burstwrap 
+          // boundary, and uses that to set a bit mask for burstwrap.
+          //
+          // This should synthesize to a small adder, followed by a 
+          // per-bit comparator (which gets folded into the adder).
+          //--------------------------------------
+          reg     [PKT_BURSTWRAP_W - 2 : 0]       burstwrap_boundary_write;
+          reg     [PKT_BURSTWRAP_W - 2 : 0]       burstwrap_boundary_read;
+          wire    [31 : 0]                        burstwrap_boundary_width_write;
+          wire    [31 : 0]                        burstwrap_boundary_width_read;
+          
+          reg     [PKT_ADDR_W-1 : 0]              incremented_burst_address;
+          reg     [PKT_ADDR_W-1 : 0]              burstwrap_mask;
+          reg     [PKT_ADDR_W-1 : 0]              burst_address_high;
+          reg     [PKT_ADDR_W-1 : 0]              burst_address_low;
+          reg [PKT_ADDR_W + (PKT_BURSTWRAP_W-1) + 4 : 0] address_for_alignment;
+          reg [PKT_ADDR_W+$clog2(NUMSYMBOLS)-1 :0]  address_after_alignment;
+          wire    [31:0]  bytes_in_transfer_minusone_write_wire;     // eliminates synthesis warning
+          wire    [31:0]  bytes_in_transfer_minusone_read_wire;     // eliminates synthesis warning 
+          
+          assign burstwrap_boundary_width_write   =    awsize_q0 + log2ceil(awlen_q0 + 1);
+          assign burstwrap_boundary_width_read    =    arsize_q0 + log2ceil(arlen_q0 + 1);
+          
+          function reg [PKT_BURSTWRAP_W - 2 : 0] burstwrap_boundary_calculation
+          (
+              input [31 : 0]  burstwrap_boundary_width,
+              input int       width = PKT_BURSTWRAP_W - 1
+          );
+              integer i;
+          
+              burstwrap_boundary_calculation = 0;
+              for (i = 0; i < width; i++) begin
+                  if (burstwrap_boundary_width > i)
+                      burstwrap_boundary_calculation[i] = 1;
+              end
+          
+          endfunction 
+          
+          assign burstwrap_boundary_write = burstwrap_boundary_calculation(burstwrap_boundary_width_write, PKT_BURSTWRAP_W - 1);
+          assign burstwrap_boundary_read  = burstwrap_boundary_calculation(burstwrap_boundary_width_read, PKT_BURSTWRAP_W - 1);
+          
+          //--------------------------------------
+          // Use the burst type to set correct burstwrap value and address increment
+          //--------------------------------------
+          
+          
+          assign  bytes_in_transfer_minusone_write_wire = bytes_in_transfer(awsize_q0) - 1;
+          assign  bytes_in_transfer_minusone_read_wire  = bytes_in_transfer(arsize_q0) - 1; 
+          
+          always_comb
+          begin
+              burstwrap_value_write = 0;
+              case (write_burst_type)
+                  INCR:    
+                  begin
+                      burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = {PKT_BURSTWRAP_W {1'b1}};
+                  end 
+                  WRAP:
+                  begin
+                      burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = {1'b0, burstwrap_boundary_write};
+                  end
+                  FIXED:
+                  begin
+                      burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = bytes_in_transfer_minusone_write_wire[PKT_BURSTWRAP_W -1 : 0];
+                  end
+                  default:
+                  begin
+                      burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0]    = {PKT_BURSTWRAP_W {1'b1}};
+                  end
+              endcase
+          end
+          
+          always_comb
+          begin
+              burstwrap_value_read = 0;
+              case (read_burst_type)
+                  INCR:    
+                  begin
+                      burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = {PKT_BURSTWRAP_W {1'b1}};
+                  end 
+                  WRAP:
+                  begin
+                      burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = {1'b0, burstwrap_boundary_read};
+                  end
+                  FIXED:
+                  begin
+                      burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = bytes_in_transfer_minusone_read_wire[PKT_BURSTWRAP_W -1 : 0];    
+                  end
+                  default:
+                  begin
+                      burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0] = {PKT_BURSTWRAP_W {1'b1}};
+                  end
+              endcase
+          end
             assign address_aligned          = address_after_alignment[PKT_ADDR_W - 1 : 0];
             assign address_for_alignment  = {burstwrap_boundary_write,awburst_q0, start_address, awsize_q0};
  
@@ -885,7 +884,7 @@ always_comb
         write_cp_data[PKT_TRANS_READ                 ]      = '0;
         write_cp_data[PKT_TRANS_WRITE                ]      = 1'b1; 
         write_cp_data[PKT_TRANS_POSTED               ]      = '0;
-        write_cp_data[PKT_BURSTWRAP_H:PKT_BURSTWRAP_L]      = burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0];
+        write_cp_data[PKT_BURSTWRAP_H:PKT_BURSTWRAP_L]      = (AXI_VERSION == "AXI4Lite") ? 0 : burstwrap_value_write[PKT_BURSTWRAP_W - 1 : 0];
         write_cp_data[PKT_ADDR_H     :PKT_ADDR_L     ]      = address_aligned;
         write_cp_data[PKT_DATA_H     :PKT_DATA_L     ]      = wdata_q0;
         write_cp_data[PKT_BYTEEN_H   :PKT_BYTEEN_L   ]      = wstrb_q0;
@@ -956,7 +955,7 @@ always_comb
         read_cp_data[PKT_TRANS_READ                 ]       = '1;
         read_cp_data[PKT_TRANS_WRITE                ]       = '0;
         read_cp_data[PKT_TRANS_POSTED               ]       = '0;
-        read_cp_data[PKT_BURSTWRAP_H:PKT_BURSTWRAP_L]       = burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0]; 
+        read_cp_data[PKT_BURSTWRAP_H:PKT_BURSTWRAP_L]       = (AXI_VERSION == "AXI4Lite") ? 0 : burstwrap_value_read[PKT_BURSTWRAP_W - 1 : 0];
         read_cp_data[PKT_ADDR_H     :PKT_ADDR_L     ]       = araddr_q0;
         read_cp_data[PKT_DATA_H     :PKT_DATA_L     ]       = '0;
         read_cp_data[PKT_BYTEEN_H   :PKT_BYTEEN_L   ]       = {PKT_BYTEEN_W{1'b1}};

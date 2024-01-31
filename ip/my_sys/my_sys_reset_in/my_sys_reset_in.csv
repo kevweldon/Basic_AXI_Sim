@@ -1,4 +1,4 @@
-# system info my_sys_reset_in on 2023.10.06.07:01:21
+# system info my_sys_reset_in on 2024.01.31.04:33:17
 system_info:
 name,value
 DEVICE,1SM21BHU2F53E1VG
@@ -6,7 +6,7 @@ DEVICE_FAMILY,Stratix 10
 GENERATION_ID,0
 #
 #
-# Files generated for my_sys_reset_in on 2023.10.06.07:01:21
+# Files generated for my_sys_reset_in on 2024.01.31.04:33:17
 files:
 filepath,kind,attributes,module,is_top
 sim/my_sys_reset_in.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,my_sys_reset_in,true

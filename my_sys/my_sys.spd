@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simPackage>
  <file
-   path="altera_merlin_axi_translator_1930/sim/my_sys_altera_merlin_axi_translator_1930_ivia3ca.sv"
+   path="altera_merlin_axi_translator_1931/sim/my_sys_altera_merlin_axi_translator_1931_d46vvwa.sv"
    type="SYSTEM_VERILOG"
-   library="altera_merlin_axi_translator_1930" />
+   library="altera_merlin_axi_translator_1931" />
  <file
    path="altera_merlin_slave_translator_191/sim/my_sys_altera_merlin_slave_translator_191_x56fcki.sv"
    type="SYSTEM_VERILOG"
    library="altera_merlin_slave_translator_191" />
  <file
-   path="altera_merlin_axi_master_ni_1960/sim/altera_merlin_address_alignment.sv"
+   path="altera_merlin_axi_master_ni_1962/sim/altera_merlin_address_alignment.sv"
    type="SYSTEM_VERILOG"
-   library="altera_merlin_axi_master_ni_1960" />
+   library="altera_merlin_axi_master_ni_1962" />
  <file
-   path="altera_merlin_axi_master_ni_1960/sim/my_sys_altera_merlin_axi_master_ni_1960_zjziuba.sv"
+   path="altera_merlin_axi_master_ni_1962/sim/my_sys_altera_merlin_axi_master_ni_1962_2kryw2a.sv"
    type="SYSTEM_VERILOG"
-   library="altera_merlin_axi_master_ni_1960" />
+   library="altera_merlin_axi_master_ni_1962" />
  <file
    path="altera_merlin_slave_agent_1921/sim/my_sys_altera_merlin_slave_agent_1921_b6r3djy.sv"
    type="SYSTEM_VERILOG"

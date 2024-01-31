@@ -32,7 +32,7 @@
 // -----------------------------------------
 `timescale 1 ns / 1 ns
 
-module my_sys_altera_merlin_axi_translator_1930_ivia3ca
+module my_sys_altera_merlin_axi_translator_1931_d46vvwa
 #( 
     // ----------------
     // Interface parameters
@@ -163,6 +163,8 @@ module my_sys_altera_merlin_axi_translator_1930_ivia3ca
               
               CALCULATE_AWUSER_ADDRCHK =  USE_S0_AWUSER_ADDRCHK==0 && USE_M0_AWUSER_ADDRCHK ==1, 
               CALCULATE_ARUSER_ADDRCHK =  USE_S0_ARUSER_ADDRCHK==0 && USE_M0_ARUSER_ADDRCHK ==1,              
+              
+              SKIP_USER_ADDRCHK_CAL =  ((M0_ADDR_WIDTH/8) - M0_USER_ADDRCHK_WIDTH > 1)  , 
               
               S0_PADDING_ZERO      = (S0_USER_ADDRCHK_WIDTH*8) - S0_ADDR_WIDTH,
               M0_PADDING_ZERO      = (M0_USER_ADDRCHK_WIDTH*8) - M0_ADDR_WIDTH,
@@ -687,7 +689,12 @@ generate
     end
 
     if (CALCULATE_AWUSER_ADDRCHK && ROLE_BASED_USER) begin
-        assign m0_awuser_addrchk = addrcalcParity({{M0_PADDING_ZERO{1'b0}},s0_awaddr});
+        if(SKIP_USER_ADDRCHK_CAL) begin
+            assign m0_awuser_addrchk = '0;
+        end
+        else begin
+            assign m0_awuser_addrchk = addrcalcParity({{M0_PADDING_ZERO{1'b0}},m0_awaddr});
+        end
     end else if(ROLE_BASED_USER) begin
         assign m0_awuser_addrchk = s0_awuser_addrchk;
     end else begin
@@ -695,7 +702,12 @@ generate
     end
 
     if (CALCULATE_ARUSER_ADDRCHK && ROLE_BASED_USER) begin
-        assign m0_aruser_addrchk = addrcalcParity({{M0_PADDING_ZERO{1'b0}},s0_araddr});
+        if(SKIP_USER_ADDRCHK_CAL) begin
+            assign m0_awuser_addrchk = '0;
+        end
+        else begin
+            assign m0_aruser_addrchk = addrcalcParity({{M0_PADDING_ZERO{1'b0}},m0_araddr});
+        end
     end else if(ROLE_BASED_USER) begin
         assign m0_aruser_addrchk = s0_aruser_addrchk;
     end else begin

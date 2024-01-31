@@ -10,9 +10,9 @@ namespace eval my_sys {
     set libraries [dict merge $libraries [my_sys_clock_in::get_design_libraries]]
     set libraries [dict merge $libraries [my_sys_reset_in::get_design_libraries]]
     set libraries [dict merge $libraries [my_sys_mgc_axi4_master_0::get_design_libraries]]
-    dict set libraries altera_merlin_axi_translator_1930    1
+    dict set libraries altera_merlin_axi_translator_1931    1
     dict set libraries altera_merlin_slave_translator_191   1
-    dict set libraries altera_merlin_axi_master_ni_1960     1
+    dict set libraries altera_merlin_axi_master_ni_1962     1
     dict set libraries altera_merlin_slave_agent_1921       1
     dict set libraries altera_avalon_sc_fifo_1931           1
     dict set libraries altera_merlin_router_1921            1
@@ -50,10 +50,10 @@ namespace eval my_sys {
     set design_files [concat $design_files [my_sys_clock_in::get_design_files $USER_DEFINED_COMPILE_OPTIONS $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_VHDL_COMPILE_OPTIONS "$QSYS_SIMDIR/../../ip/my_sys/my_sys_clock_in/sim/"]]
     set design_files [concat $design_files [my_sys_reset_in::get_design_files $USER_DEFINED_COMPILE_OPTIONS $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_VHDL_COMPILE_OPTIONS "$QSYS_SIMDIR/../../ip/my_sys/my_sys_reset_in/sim/"]]
     set design_files [concat $design_files [my_sys_mgc_axi4_master_0::get_design_files $USER_DEFINED_COMPILE_OPTIONS $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_VHDL_COMPILE_OPTIONS "$QSYS_SIMDIR/../../ip/my_sys/my_sys_mgc_axi4_master_0/sim/"]]
-    lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_axi_translator_1930/sim/my_sys_altera_merlin_axi_translator_1930_ivia3ca.sv"]\"  -work altera_merlin_axi_translator_1930"                        
+    lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_axi_translator_1931/sim/my_sys_altera_merlin_axi_translator_1931_d46vvwa.sv"]\"  -work altera_merlin_axi_translator_1931"                        
     lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_slave_translator_191/sim/my_sys_altera_merlin_slave_translator_191_x56fcki.sv"]\"  -work altera_merlin_slave_translator_191"                     
-    lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_axi_master_ni_1960/sim/altera_merlin_address_alignment.sv"]\"  -work altera_merlin_axi_master_ni_1960"                                           
-    lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_axi_master_ni_1960/sim/my_sys_altera_merlin_axi_master_ni_1960_zjziuba.sv"]\"  -work altera_merlin_axi_master_ni_1960"                           
+    lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_axi_master_ni_1962/sim/altera_merlin_address_alignment.sv"]\"  -work altera_merlin_axi_master_ni_1962"                                           
+    lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_axi_master_ni_1962/sim/my_sys_altera_merlin_axi_master_ni_1962_2kryw2a.sv"]\"  -work altera_merlin_axi_master_ni_1962"                           
     lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_slave_agent_1921/sim/my_sys_altera_merlin_slave_agent_1921_b6r3djy.sv"]\"  -work altera_merlin_slave_agent_1921"                                 
     lappend design_files "vlog -sv $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_merlin_slave_agent_1921/sim/altera_merlin_burst_uncompressor.sv"]\"  -work altera_merlin_slave_agent_1921"                                              
     lappend design_files "vlog $USER_DEFINED_VERILOG_COMPILE_OPTIONS $USER_DEFINED_COMPILE_OPTIONS  \"[normalize_path "$QSYS_SIMDIR/../altera_avalon_sc_fifo_1931/sim/my_sys_altera_avalon_sc_fifo_1931_vhmcgqy.v"]\"  -work altera_avalon_sc_fifo_1931"                                                  

@@ -1,4 +1,4 @@
-# system info my_sys_clock_in on 2023.10.06.07:01:17
+# system info my_sys_clock_in on 2024.01.31.04:33:12
 system_info:
 name,value
 DEVICE,1SM21BHU2F53E1VG
@@ -6,7 +6,7 @@ DEVICE_FAMILY,Stratix 10
 GENERATION_ID,0
 #
 #
-# Files generated for my_sys_clock_in on 2023.10.06.07:01:17
+# Files generated for my_sys_clock_in on 2024.01.31.04:33:12
 files:
 filepath,kind,attributes,module,is_top
 sim/my_sys_clock_in.v,VERILOG,CONTAINS_INLINE_CONFIGURATION,my_sys_clock_in,true
